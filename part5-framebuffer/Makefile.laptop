@@ -1,0 +1,14 @@
+GCC = gcc
+
+COMMON_SRC := vec3.c sqrt.c util.c scatter.c ray.c hit_record.c
+OBJS = $(patsubst %.c,%.o,$(COMMON_SRC))
+CFLAGS_EXTRA := -DON_PI=0
+CFLAGS_EXTRA += -O3
+render: final_render.c $(OBJS)
+	$(GCC) $(CFLAGS_EXTRA) -o $@ $^
+
+%.o: %.c
+	$(GCC) -c $< -o $@
+    
+clean:
+	rm *.o
